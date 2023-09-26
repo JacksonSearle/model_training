@@ -1,7 +1,4 @@
 transformers
 datasets
-pytorch
+torch
 matplotlib
-sentencepiece
-sci-kit learn
-protobuf==3.20.0  # for adding tokens to tokenizer.model

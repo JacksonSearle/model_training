@@ -18,30 +18,39 @@ To get started, follow these steps to set up your environment and start training
       git clone https://github.com/JacksonSearle/model_training.git
       ```
       
-    - Run the following command to create a new environment with Python 3.11:
+    - Run the following command to create a new environment:
       ```
-      mamba create --name model_training python=3.11
+      mamba create --name model_training
       ```
     - Activate the newly created environment:
       ```
       mamba activate model_training
       ```
+    - Install python:
+      ```
+      mamba install python
+      ```
     - Install the required dependencies from the provided `requirements.txt` file:
       ```
       pip install -r requirements.txt
       ```
-6. **Access Key Setup**
-    - Follow [these steps](https://huggingface.co/docs/hub/security-tokens) to set up a read access token in Huggingface.
+6. **Complete Setup**:
+    - Run the setup script to download important things:
+      ```
+      python setup.py
+      ```
+
+    - Submit job.sh to train a test model
+      ```
+      sbatch job.sh
+      ```
+7. **Access Key Setup**
+    - Follow [these steps](https://huggingface.co/docs/hub/security-tokens) to set up a read access token in Huggingface. This will be important for uploading your model to Huggingface's hub.
       
     - In command line, replace your token in quotes and run the following command:
       
       ```
       export HF_TOKEN="YOUR_TOKEN_HERE"
-      ```
-7. **Complete Setup**:
-    - Submit job.sh to train a test model
-      ```
-      sbatch job.sh
       ```
 
 You're now all set up to start training your rocket model! If you have any questions or run into issues, feel free to refer to the documentation or reach out to our community for assistance.
