@@ -15,35 +15,30 @@ To get started, follow these steps to set up your environment and start training
 5. **Set Up Your Environment**
     - In the command line, navigate to your preferred directory and clone this repository with the following prompt:
       ```
-      git clone https://github.com/DRAGNLabs/Rocket.git
+      git clone https://github.com/JacksonSearle/model_training.git
       ```
       
     - Run the following command to create a new environment with Python 3.11:
       ```
-      mamba create --name rocket_training python=3.11
+      mamba create --name model_training python=3.11
       ```
     - Activate the newly created environment:
       ```
-      mamba activate rocket_training
+      mamba activate model_training
       ```
     - Install the required dependencies from the provided `requirements.txt` file:
       ```
-      mamba install -c conda-forge --file requirements.txt
+      pip install -r requirements.txt
       ```
 6. **Access Key Setup**
-    - Follow these [steps](https://huggingface.co/docs/hub/security-tokens) to set up an read access token.
+    - Follow [these steps](https://huggingface.co/docs/hub/security-tokens) to set up a read access token in Huggingface.
       
-    - In command line, replace your token and run the following command:
+    - In command line, replace your token in quotes and run the following command:
       
       ```
-      export HF_TOKEN="<YOUR_TOKEN_HERE>"
+      export HF_TOKEN="YOUR_TOKEN_HERE"
       ```
 7. **Complete Setup**:
-    - Run the setup script to finalize the configuration:
-      ```
-      python setup.py
-      ```
-
     - Submit job.sh to train a test model
       ```
       sbatch job.sh
