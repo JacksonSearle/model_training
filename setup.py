@@ -15,15 +15,17 @@ def download_dataset():
         os.makedirs(directory_name)
     
     books = {
-        "The Book of Mormon": "https://www.gutenberg.org/files/17/17-0.txt",
-        "The Letters of Jane Austen": "https://www.gutenberg.org/cache/epub/42078/pg42078.txt",
-        "My Bondage and My Freedom": "https://www.gutenberg.org/cache/epub/202/pg202.txt",
-        "Anne of Green Gables": "https://www.gutenberg.org/cache/epub/45/pg45.txt",
-        "Romeo and Juliet": "https://www.gutenberg.org/cache/epub/1513/pg1513.txt"
+        "The_Book_of_Mormon": "https://www.gutenberg.org/files/17/17-0.txt",
+        "The_Letters_of_Jane_Austen": "https://www.gutenberg.org/cache/epub/42078/pg42078.txt",
+        "My_Bondage_and_My_Freedom": "https://www.gutenberg.org/cache/epub/202/pg202.txt",
+        "Anne_of_Green_Gables": "https://www.gutenberg.org/cache/epub/45/pg45.txt",
+        "Romeo_and_Juliet": "https://www.gutenberg.org/cache/epub/1513/pg1513.txt"
     }
 
     for name, link in books.items():
-        name = f'{directory_name}/{name}.txt'
+        if not os.path.exists(f'{directory_name}/{name}'):
+            os.makedirs(f'{directory_name}/{name}')
+        name = f'{directory_name}/{name}/book.txt'
         print(name)
         if not os.path.exists(name):
             try:
