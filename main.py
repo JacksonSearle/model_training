@@ -1,9 +1,8 @@
 import os
-import argparse
-from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_dataset
 from transformers import DataCollatorWithPadding
 from transformers import TrainingArguments, Trainer
+from model import model, tokenizer
 
 def load_datasets(data_files):
     dataset = load_dataset('text', data_files=data_files)
@@ -12,10 +11,20 @@ def load_datasets(data_files):
 
 def tokenize_dataset(dataset):
     def tokenize_function(examples):
-        return tokenizer(examples['text'])
-        
-    tokenized_datasets = dataset.map(tokenize_function, batched=True)
+        output = tokenizer(
+            examples['text'],
+            max_length=512, #
+            truncation=True #
+            )
+        # output["labels"] = output["input_ids"].clone()
+        return output
+    
+    tokenized_datasets = dataset.map(tokenize_function, batched=True, remove_columns=dataset['train'].column_names)
+    # input_ids_column = tokenized_datasets['input_ids']
+    # tokenized_datasets.add_column(name='labels', column=input_ids_column)
+    # tokenized_datasets = tokenized_datasets.rename_column('input_ids', 'labels')
     return tokenized_datasets
+
 
 
 def train_model(train_dataset, data_collator, training_args, save_path):
@@ -31,32 +40,23 @@ def train_model(train_dataset, data_collator, training_args, save_path):
 
 
 def main():
-    # Grab the right 
-    model_name = 'gpt-2'  # You can replace this with any other model you are using
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
-
     dataset_path = "datasets/Romeo_and_Juliet/book.txt"
-    save_path = "models/my_cool_model"
+    save_path = "models/my_cool_model/final_model"
     tokenized_path = "tokenized"
-    
-    if not os.path.exists(tokenized_path):
-        os.makedirs(tokenized_path)
-        
+
     train_dataset = load_datasets({'train': dataset_path})
     train_dataset = tokenize_dataset(train_dataset['train'])
     train_dataset.save_to_disk(tokenized_path)
     
     training_args = TrainingArguments(
+        output_dir="models/my_cool_model",
         learning_rate=1e-3,
-        output_dir="./checkpoints",
         num_train_epochs=1,
-        per_device_train_batch_size=4,
+        per_device_train_batch_size=1,
         warmup_steps=500,
-        logging_dir="./logs"
     )
     
-    data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+    data_collator = DataCollatorWithPadding(tokenizer=tokenizer, max_length=1024)
     
     train_model(train_dataset, data_collator, training_args, save_path)
 

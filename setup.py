@@ -8,7 +8,6 @@ from transformers import AutoTokenizer
 #     print("\033[1;32m Downloaded Llama-2! \033[1;30m\n\n")
 
 def download_dataset():
-    #TODO: Download books to dataset folder
     print(f'\n\nDownloading datasets')
     directory_name = "datasets"
     if not os.path.exists(directory_name):
