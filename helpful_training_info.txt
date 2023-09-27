@@ -22,12 +22,17 @@ Here are some hyperparameters to try changing:
         (https://www.gutenberg.org/) for more books to use! Make sure the url ends in ".txt".
 
 
-# Dataset Info #
+# Datasets #
 
 Some shorter books (roughly less than 10,000 lines) might not give you enough data for your model to pick up on.
 
 
-# GPU INFO #
+# GPUs #
 
 You can train gpt2 on "#SBATCH --gpus=1 -C kepler" with a batch size of 1
 You can train gpt-medium on  "#SBATCH --gpus=1 -C pascal" with a batch size of 1
+
+
+# Available Hardware #
+
+See (https://rc.byu.edu/documentation/resources) for info
