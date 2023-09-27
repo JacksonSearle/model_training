@@ -1,44 +1,0 @@
-Saving the dataset (0/1 shards):   0%|          | 0/5648 [00:00<?, ? examples/s]Saving the dataset (1/1 shards): 100%|██████████| 5648/5648 [00:00<00:00, 713773.51 examples/s]Saving the dataset (1/1 shards): 100%|██████████| 5648/5648 [00:00<00:00, 701950.60 examples/s]
-  0%|          | 0/5648 [00:00<?, ?it/s]You're using a GPT2TokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
-/home/searlejj/.conda/envs/model_training/lib/python3.11/site-packages/transformers/tokenization_utils_base.py:2436: UserWarning: `max_length` is ignored when `padding`=`True` and there is no truncation strategy. To pad to max length, use `padding='max_length'`.
-  warnings.warn(
-Traceback (most recent call last):
-  File "/home/searlejj/CS301R_test/model_training/main.py", line 68, in <module>
-    main()
-  File "/home/searlejj/CS301R_test/model_training/main.py", line 57, in main
-    train_model(train_dataset, data_collator, training_args, save_path)
-  File "/home/searlejj/CS301R_test/model_training/main.py", line 34, in train_model
-    trainer.train()
-  File "/home/searlejj/.conda/envs/model_training/lib/python3.11/site-packages/transformers/trainer.py", line 1553, in train
-    return inner_training_loop(
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/searlejj/.conda/envs/model_training/lib/python3.11/site-packages/transformers/trainer.py", line 1835, in _inner_training_loop
-    tr_loss_step = self.training_step(model, inputs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/searlejj/.conda/envs/model_training/lib/python3.11/site-packages/transformers/trainer.py", line 2679, in training_step
-    loss = self.compute_loss(model, inputs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/searlejj/.conda/envs/model_training/lib/python3.11/site-packages/transformers/trainer.py", line 2721, in compute_loss
-    raise ValueError(
-ValueError: The model did not return a loss from the inputs, only the following keys: logits,past_key_values. For reference, the inputs it received are input_ids,attention_mask.
-  0%|          | 0/5648 [00:00<?, ?it/s]
-Tue Sep 26 17:20:16 2023       
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 525.105.17   Driver Version: 525.105.17   CUDA Version: 12.0     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  Tesla P100-PCIE...  On   | 00000000:04:00.0 Off |                    0 |
-| N/A   29C    P0    33W / 250W |      0MiB / 16384MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                                  |
-|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-|        ID   ID                                                   Usage      |
-|=============================================================================|
-|  No running processes found                                                 |
-+-----------------------------------------------------------------------------+
