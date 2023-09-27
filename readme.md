@@ -7,7 +7,7 @@ This project comprises several directories and files, each serving a specific pu
 - **datasets**: Holds all the datasets.
 - **models**: Contains all the models.
 - **setup.py**: Responsible for downloading the required datasets and models for training.
-- **main.py**: Initiates the model training process.
+- **train.py**: Initiates the model training process.
 - **generate.py**: Generates text from a trained model.
 - **upload.py**: Allows uploading of models to Hugging Face's hub.
 
@@ -33,16 +33,18 @@ To begin, adhere to the following steps to ensure your environment is correctly 
    ```
 6. **Configure Access Token**:
    Follow the [token setup guide](https://huggingface.co/docs/hub/security-tokens) on Hugging Face and run `export HF_TOKEN="YOUR_TOKEN_HERE"` in your command line.
+7. **Upload to Hugging Face**:
+   Once your job has successfully completed, run `python upload.py` in your command line to upload your model to Hugging Face's online hub. Login to your Hugging Face account to view your model or search for it [here](https://huggingface.co/models).
 
 ## Model Training and Generation
-- Execute `main.py` to start the training process, and use `generate.py` to create text from your trained model.
-- Adjust hyperparameters in `main.py` and `setup.py` as needed; refer to the **Hyperparameter Adjustments** section for more details.
-- Explore different models, datasets, and make adjustments to hyperparameters as per your requirements.
+- Use `sbatch job.sh` to start the training process, and use `generate.py` to create text from your trained model.
+- Adjust hyperparameters in `train.py` and `setup.py` as needed; refer to the **Hyperparameter Adjustments** section for more details.
+- Explore different models, datasets, and make adjustments to hyperparameters as you wish.
 
 ### Hyperparameter Adjustments
-- **num_train_epochs** (in main.py): Determine how many times the model will go through the entire dataset.
-- **model_name** (in main.py): Change this to any model name you see in setup.py. Add any new models you want to setup.py and re-run setup.py in the login node to download the model for training.
-- **books** (in setup.py) and **book_name** (in main.py): Include a book name and its URL from [Project Gutenberg](https://www.gutenberg.org/). Ensure the URL terminates with ".txt". Re-run setup.py in the login node to download the new dataset for training.
+- **num_train_epochs** (in train.py): Determines how many times the model will go through the entire dataset.
+- **model_name** (in train.py): Change this to any model name you see in setup.py. Add any new models you want to setup.py and re-run setup.py in the login node to download the model for training.
+- **books** (in setup.py) and **book_name** (in train.py): In setup.py, include a book name and its URL from [Project Gutenberg](https://www.gutenberg.org/). Ensure the URL terminates with ".txt". Re-run setup.py in the login node to download the new dataset for training. Change **book_name** in train.py to select that new book.
 
 ## GPU Training Recommendations
 - For gpt2 training: `#SBATCH --gpus=1 -C kepler` with a batch size of 1.
