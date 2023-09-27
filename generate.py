@@ -1,13 +1,15 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-model_name = 'gpt2-medium'
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+model_tokenizer_name = 'gpt2-medium'
+tokenizer = AutoTokenizer.from_pretrained(model_tokenizer_name)
 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 
-checkpoint = "models/my_cool_model"
 
-# Load the trained model
-model = AutoModelForCausalLM.from_pretrained(checkpoint)
+# You can generate from your trained model, or the vanilla version of anything on Huggingface
+# model_name = "gpt2-medium"
+model_name = "models/my_cool_model"
+
+model = AutoModelForCausalLM.from_pretrained(model_name)
 
 # Generate answers using the trained model
 input_question = "But soft, what light through yonder window breaks?\n"

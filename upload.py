@@ -5,12 +5,15 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 
 # Load the tokenizer and model
-model_name = "my_cool_model"
-save_path = "models/" + model_name
+my_project_name = "my_cool_model"
+save_path = "models/" + my_project_name
 
 model = AutoModelForCausalLM.from_pretrained(save_path)
 
 # Push the model and tokenizer to the Hugging Face Model Hub
-huggingface_model_name = 'my_cool_model'
-model.push_to_hub(huggingface_model_name)
-tokenizer.push_to_hub(huggingface_model_name)
+model.push_to_hub(my_project_name)
+tokenizer.push_to_hub(my_project_name)
+
+print("Upload successful (hopefully)\n Login to your Huggingface account through a web browser to view your model :)")
+print("You can easily share your model with others. Either share the url to the webpage, ")
+print("or share the few lines of python code from generate.py to get them started")

@@ -1,11 +1,14 @@
 import os
 import subprocess
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
-# def download_llama():
-#     print(f'\n\nDownloading Llama\r')
-#     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
-#     print("\033[1;32m Downloaded Llama-2! \033[1;30m\n\n")
+def download_models():
+    model_names = ['gpt2', 'gpt2-medium', "meta-llama/Llama-2-7b-hf"]
+    for model_name in model_names:
+        print(f'Downloading {model_name} model...')
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+        model = AutoModelForCausalLM.from_pretrained(model_name)
 
 def download_dataset():
     print(f'\n\nDownloading datasets')
@@ -42,7 +45,7 @@ def download_dataset():
     print("Datesets downloaded successfully!")
 
 def complete_setup():
-    # download_llama()
+    download_models()
     download_dataset()
 
 if __name__ == "__main__":
