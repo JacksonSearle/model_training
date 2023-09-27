@@ -28,7 +28,7 @@ def get_dataset(dataset_path, text_file_path):
 
 
 def main(model, tokenizer):
-    book_name = 'Romeo_and_Juliet'
+    book_name = 'The_Book_of_Mormon'
     dataset_path = f'datasets/{book_name}'
     text_file_path = f'{dataset_path}/book.txt'
 
@@ -38,8 +38,9 @@ def main(model, tokenizer):
     train_dataset = get_dataset(dataset_path, text_file_path)
     
     training_args = TrainingArguments(
+        save_total_limit=1,
         output_dir="models/my_cool_model",
-        learning_rate=1e-3,
+        learning_rate=1e-4,
         num_train_epochs=1,
         per_device_train_batch_size=1,
         warmup_steps=500,
@@ -69,7 +70,8 @@ if __name__ == '__main__':
     directory_name = "datasets"
     if not os.path.exists(directory_name):
         print('Run "python setup.py" to download datasets and models from the login node. Then "sbatch job.sh".\n Look at readme.md for more setup info.')
-    model_name = 'gpt2'
+
+    model_name = 'gpt2-medium'
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.add_special_tokens({'pad_token': '[PAD]'})
     model = AutoModelForCausalLM.from_pretrained(model_name)

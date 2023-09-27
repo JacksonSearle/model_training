@@ -1,10 +1,10 @@
-# Rocket Training
+# Model Training
 
-Welcome to Rocket Training! In this repository, you'll find all the information you need to set up and train your rocket model using Hugging Face's Llama 2 platform.
+Welcome to Model Training! In this repository, you'll find all the information you need to set up and train your own model using Hugging Face's gpt2 and Llama 2 platform.
 
 ### Setup Process
 
-To get started, follow these steps to set up your environment and start training your rocket model:
+To get started, follow these steps to set up your environment and start training your model:
 
 1. **Create a Hugging Face Account**: If you haven't already, go to [Hugging Face](https://huggingface.co/login) and create an account.
 
@@ -53,6 +53,6 @@ To get started, follow these steps to set up your environment and start training
       export HF_TOKEN="YOUR_TOKEN_HERE"
       ```
 
-You're now all set up to start training your rocket model! If you have any questions or run into issues, feel free to refer to the documentation or reach out to our community for assistance.
+You're now all set up to start training your own model! If you have any questions or run into issues, feel free to refer to the documentation or reach out to our community for assistance.
 
-Happy rocket training! 🚀🛰️
+Happy training!

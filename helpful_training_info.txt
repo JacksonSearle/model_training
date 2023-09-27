@@ -1,0 +1,33 @@
+# File Structure #
+
+Read "readme.md" for the initial setup
+
+datasets is a folder that holds all of your datasets.
+models is a folder that holds all your models.
+main.py lets you train your own model.
+generate.py lets you generate text from a model you have saved.
+upload.py lets you upload your own model to huggingface's hub
+
+
+# Hyperparameters #
+Here are some hyperparameters to try changing:
+
+    1. num_train_epochs (main.py) --> This is how many times you will train through your entire dataset (which is a book)
+        Try setting this to a value greater than 1.
+
+    2. model_name (main.py) --> Your model and tokenizer work together in the training process. 
+        Changing this to "Llama-2-7b" will let you use a very large language model for training.
+
+    3. books (setup.py) and book_name (main.py) --> Add a book name and its url link. Look here 
+        (https://www.gutenberg.org/) for more books to use! Make sure the url ends in ".txt".
+
+
+# Dataset Info #
+
+Some shorter books (roughly less than 10,000 lines) might not give you enough data for your model to pick up on.
+
+
+# GPU INFO #
+
+You can train gpt2 on "#SBATCH --gpus=1 -C kepler" with a batch size of 1
+You can train gpt-medium on  "#SBATCH --gpus=1 -C pascal" with a batch size of 1
