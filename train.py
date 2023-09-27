@@ -92,14 +92,10 @@ if __name__ == '__main__':
         print('Run "python setup.py" to download datasets and models from the login node. Then "sbatch job.sh".\n Look at readme.md for more setup info.')
     
     # Define the model and tokenizer
-    model_name = 'meta-llama/Llama-2-7b-hf'
+    model_name = 'gpt2'
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.add_special_tokens({'pad_token': '[PAD]'})
     model = AutoModelForCausalLM.from_pretrained(model_name)
-
-    # This helps the larger model fit onto the GPU, while retaining most of its performance
-    if model_name == 'meta-llama/Llama-2-7b-hf':
-        model = model.to(device='cuda', dtype=torch.float16)
     
     # Call the main function
     main(model, tokenizer)

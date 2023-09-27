@@ -1,13 +1,13 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-model_tokenizer_name = 'gpt2-medium'
+model_tokenizer_name = 'gpt2'
 tokenizer = AutoTokenizer.from_pretrained(model_tokenizer_name)
 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 
 
 # You can generate from your trained model, or the vanilla version of anything on Huggingface
-# model_name = "gpt2-medium"
-model_name = "models/my_cool_model"
+
+model_name = "models/my_cool_model" # or "gpt2-medium" for example
 
 model = AutoModelForCausalLM.from_pretrained(model_name)
 

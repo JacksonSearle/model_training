@@ -1,6 +1,6 @@
-# Unified Model Training Guide
+# Model Training Guide
 
-Welcome to the Unified Model Training Guide! This repository serves as a comprehensive guide for setting up, training, generating, and uploading text models utilizing Hugging Face's gpt2 and Llama 2 platforms. The project offers structured environment, concise file structures, and clear instructions to facilitate smooth user experience throughout the model training process.
+Welcome to the Model Training Guide! This repository serves as a comprehensive guide for setting up, training, generating, and uploading text models utilizing Hugging Face's gpt2 and Llama 2 platforms. The project offers structured environment, concise file structures, and clear instructions to facilitate smooth user experience throughout the model training process.
 
 ## Project Structure Overview
 This project comprises several directories and files, each serving a specific purpose in the model training process:
@@ -47,12 +47,10 @@ To begin, adhere to the following steps to ensure your environment is correctly 
 ## GPU Training Recommendations
 - For gpt2 training: `#SBATCH --gpus=1 -C kepler` with a batch size of 1.
 - For gpt-medium training: `#SBATCH --gpus=1 -C pascal` with a batch size of 1.
+- For Llama training: `Ask the TAs for the code for A100 GPUs`
 
 ### Hardware and Resource Information
 For insights on available hardware resources, refer to [BYU Resources](https://rc.byu.edu/documentation/resources).
-
-## Contributions and Support
-Your suggestions, improvements, and bug identifications are highly valued. Please refer to the documentation or contact our community for any questions, issues, or contributions you wish to make.
 
 ## Conclusion
 This comprehensive guide is designed to ease your journey through model training, generation, and uploading. We hope you explore various models and datasets and have a fulfilling coding experience. Happy training!
