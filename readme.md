@@ -16,9 +16,11 @@ This project comprises several directories and files, each serving a specific pu
 To begin, adhere to the following steps to ensure your environment is correctly set up and ready for model training:
 
 1. **Create a Hugging Face Account**: Navigate to [Hugging Face](https://huggingface.co/login) and sign up if you haven’t already.
-2. **Request Llama 2 Access**: Apply for access at [Llama 2](https://ai.meta.com/llama/) using the same email you used for Hugging Face.
-3. **Obtain Access to the Llama-2-7b-hf Model**: Seek access to the [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) model through Hugging Face, access is usually granted within 0-2 days.
-4. **Clone the Repository and Set Up the Environment**:
+2. **Configure Access Token**:
+   Follow the [token setup guide](https://huggingface.co/docs/hub/security-tokens) on Hugging Face and in the command line run ```export HF_TOKEN="YOUR_TOKEN_HERE"``` to add your HF token to your .bashrc
+3. **Request Llama 2 Access**: Apply for access at [Llama 2](https://ai.meta.com/llama/) using the same email you used for Hugging Face.
+4. **Obtain Access to the Llama-2-7b-hf Model**: Seek access to the [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) model through Hugging Face, access is usually granted within 0-2 days.
+5. **Clone the Repository and Set Up the Environment**:
    ```
    git clone https://github.com/JacksonSearle/model_training.git
    mamba create --name model_training
@@ -26,13 +28,11 @@ To begin, adhere to the following steps to ensure your environment is correctly 
    mamba install python
    pip install -r requirements.txt
    ```
-5. **Run Setup and Submit Job**:
+6. **Run Setup and Submit Job**:
    ```
    python setup.py
    sbatch job.sh
    ```
-6. **Configure Access Token**:
-   Follow the [token setup guide](https://huggingface.co/docs/hub/security-tokens) on Hugging Face and in the command line run ```export HF_TOKEN="YOUR_TOKEN_HERE"``` to add your HF token to your .bashrc
 7. **Upload to Hugging Face**:
    Once your job has successfully completed, run `python upload.py` in your command line to upload your model to Hugging Face's online hub. Login to your Hugging Face account to view your model or search for it [here](https://huggingface.co/models).
 
