@@ -32,7 +32,7 @@ To begin, adhere to the following steps to ensure your environment is correctly 
    sbatch job.sh
    ```
 6. **Configure Access Token**:
-   Follow the [token setup guide](https://huggingface.co/docs/hub/security-tokens) on Hugging Face and add your token to job.sh.
+   Follow the [token setup guide](https://huggingface.co/docs/hub/security-tokens) on Hugging Face and in the command line run ```export HF_TOKEN="YOUR_TOKEN_HERE"``` to add your HF token to your .bashrc
 7. **Upload to Hugging Face**:
    Once your job has successfully completed, run `python upload.py` in your command line to upload your model to Hugging Face's online hub. Login to your Hugging Face account to view your model or search for it [here](https://huggingface.co/models).
 
