@@ -11,5 +11,6 @@
 export OMP_NUM_THREADS=$SLURM_CPUS_ON_NODE
 
 # LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
+export HF_TOKEN="YOUR_TOKEN_HERE"  # Adds the HF token you just generated to .bashrc
 python train.py
 nvidia-smi
