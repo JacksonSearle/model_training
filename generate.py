@@ -12,8 +12,8 @@ model_name = "models/my_cool_model" # or "gpt2-medium" for example
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
 # Generate answers using the trained model
-input_question = "But soft, what light through yonder window breaks?\n"
-input_question_encoded = tokenizer.encode(input_question, return_tensors="pt")
-output_answer = model.generate(input_question_encoded, max_new_tokens=200)
+input_prompt = "21 And it came to pass that the people of Nephi did"
+input_prompt_encoded = tokenizer.encode(input_prompt, return_tensors="pt")
+output_answer = model.generate(input_prompt_encoded, max_new_tokens=50)
 decoded_answer = tokenizer.decode(output_answer[0])
-print("Generated Answer:", decoded_answer)
+print("\nGenerated Answer:\n\n", decoded_answer)

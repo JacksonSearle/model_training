@@ -53,7 +53,7 @@ def main(model, tokenizer):
     training_args = TrainingArguments(
         save_total_limit=1,  # Maximum number of checkpoints to keep
         output_dir=save_path,  # Output directory for model and checkpoints
-        learning_rate=1e-4,  # Learning rate for training
+        learning_rate=2e-5,  # Learning rate for training
         num_train_epochs=1,  # Number of training epochs
         per_device_train_batch_size=1,  # Batch size per device
         warmup_steps=500,  # Number of warm-up steps
@@ -76,11 +76,11 @@ def main(model, tokenizer):
     trainer.save_model(save_path)
     
     # Prompt for text generation
-    prompt = "But soft, what light through yonder window breaks?\n"
+    prompt = "21 And it came to pass that the people of Nephi did"
     encoded = tokenizer(prompt, return_tensors="pt").to('cuda')
     
     # Generate text based on prompt
-    output_answer = model.generate(encoded['input_ids'], max_length=200)
+    output_answer = model.generate(encoded['input_ids'], max_length=50)
     decoded_answer = tokenizer.decode(output_answer[0])
     print("Generated Answer:", decoded_answer)
 

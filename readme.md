@@ -45,6 +45,7 @@ To begin, adhere to the following steps to ensure your environment is correctly 
 - **num_train_epochs** (in train.py): Determines how many times the model will go through the entire dataset.
 - **model_name** (in train.py): Change this to any model name you see in setup.py. Add any new models you want to setup.py and re-run setup.py in the login node to download the model for training.
 - **books** (in setup.py) and **book_name** (in train.py): In setup.py, include a book name and its URL from [Project Gutenberg](https://www.gutenberg.org/). Ensure the URL terminates with ".txt". Re-run setup.py in the login node to download the new dataset for training. Change **book_name** in train.py to select that new book.
+- **max_new_tokens** (in generate.py and train.py): Change this to a larger value to generate more text from your model.
 
 ## GPU Training Recommendations
 - For gpt2 training: `#SBATCH --gpus=1 -C kepler` with a batch size of 1.
