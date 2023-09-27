@@ -41,6 +41,9 @@ def download_dataset():
 
     print("Datesets downloaded successfully!")
 
-if __name__ == "__main__":
+def complete_setup():
     # download_llama()
     download_dataset()
+
+if __name__ == "__main__":
+    complete_setup()
