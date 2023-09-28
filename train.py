@@ -7,6 +7,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer  # Importing transf
 from transformers import DataCollatorForLanguageModeling  # Provides a function to collate data for language modeling
 from transformers import TrainingArguments, Trainer  # Provides training utility functions
 
+# Uncomment this next line to use LLama
+from llama_model import model, tokenizer
+
+
 # Function to tokenize dataset
 def tokenize_dataset(dataset):
     # Inner function to apply tokenization to the text examples
@@ -22,18 +26,11 @@ def tokenize_dataset(dataset):
 def get_dataset(dataset_path, text_file_path):
     tokenized_path = f'{dataset_path}/tokenized'
     
-    # If tokenized dataset doesn't exist, create it
-    if not os.path.exists(tokenized_path):
-        data_files = {'train': text_file_path}
-        # Loading the dataset and sampling it by paragraph
-        train_dataset = load_dataset('text', data_files=data_files, sample_by="paragraph")
-        # Tokenizing the dataset
-        train_dataset = tokenize_dataset(train_dataset['train'])
-        # Save the tokenized dataset to disk
-        train_dataset.save_to_disk(tokenized_path)
-    else:
-        # Load the tokenized dataset from disk
-        train_dataset = datasets.load_from_disk(tokenized_path)
+    data_files = {'train': text_file_path}
+    # Loading the dataset and sampling it by paragraph
+    train_dataset = load_dataset('text', data_files=data_files, sample_by="paragraph")
+    # Tokenizing the dataset
+    train_dataset = tokenize_dataset(train_dataset['train'])
     
     return train_dataset
 
@@ -67,7 +64,7 @@ def main(model, tokenizer):
         model=model,
         args=training_args,
         train_dataset=train_dataset,
-        data_collator=data_collator
+        data_collator=data_collator,
     )
     
     # Train the model
@@ -78,7 +75,7 @@ def main(model, tokenizer):
     # Prompt for text generation
     prompt = "21 And it came to pass that the people of Nephi did"
     encoded = tokenizer(prompt, return_tensors="pt").to('cuda')
-    
+
     # Generate text based on prompt
     output_answer = model.generate(encoded['input_ids'], max_length=50)
     decoded_answer = tokenizer.decode(output_answer[0])
@@ -92,10 +89,10 @@ if __name__ == '__main__':
         print('Run "python setup.py" to download datasets and models from the login node. Then "sbatch job.sh".\n Look at readme.md for more setup info.')
     
     # Define the model and tokenizer
-    model_name = 'gpt2'
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+    # model_name = 'gpt2'
+    # tokenizer = AutoTokenizer.from_pretrained(model_name)
+    # tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+    # model = AutoModelForCausalLM.from_pretrained(model_name)
     
     # Call the main function
     main(model, tokenizer)
