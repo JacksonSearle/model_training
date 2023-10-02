@@ -90,7 +90,7 @@ if __name__ == '__main__':
     
     # Keep this block of code uncommented for finetuning
     # Define the model and tokenizer
-    model_name = 'meta-llama/Llama-2-7b-hf'
+    model_name = 'gpt2'
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.add_special_tokens({'pad_token': '[PAD]'})
     model = AutoModelForCausalLM.from_pretrained(model_name)
