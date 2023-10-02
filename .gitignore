@@ -4,4 +4,3 @@ datasets
 __pycache__
 models
 *.out
-job.sh
