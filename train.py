@@ -41,6 +41,7 @@ def get_wiki_dataset():
     train_dataset = tokenize_dataset(train_dataset)
     # Takes out empty examples
     train_dataset = [example for example in train_dataset if example['text'] != '']
+    return train_dataset
 
 # Main function to execute the model training and text generation
 def main(model, tokenizer):
