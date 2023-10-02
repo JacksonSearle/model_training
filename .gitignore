@@ -5,3 +5,4 @@ __pycache__
 models
 *.out
 cpu_debug.sh
+multi_gpu.sh
