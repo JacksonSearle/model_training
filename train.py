@@ -23,7 +23,7 @@ def tokenize_dataset(dataset):
     return tokenized_datasets
 
 # Function to get or create a tokenized dataset
-def get_dataset(dataset_path, text_file_path):
+def get_book_dataset(dataset_path, text_file_path):
     tokenized_path = f'{dataset_path}/tokenized'
     
     data_files = {'train': text_file_path}
@@ -34,6 +34,14 @@ def get_dataset(dataset_path, text_file_path):
     
     return train_dataset
 
+def get_wiki_dataset():
+    # Load the wikipedia dataset through Hugging Face's Datasets library
+    train_dataset = load_dataset('wikitext', 'wikitext-2-v1')['train']
+    # Tokenize the dataset
+    train_dataset = tokenize_dataset(train_dataset)
+    # Takes out empty examples
+    train_dataset = [example for example in train_dataset if example['text'] != '']
+
 # Main function to execute the model training and text generation
 def main(model, tokenizer):
     # Paths to dataset and model
@@ -43,15 +51,16 @@ def main(model, tokenizer):
     my_project_name = 'my_cool_model'
     save_path = f'models/{my_project_name}'
     
-    # Get the tokenized dataset
-    train_dataset = get_dataset(dataset_path, text_file_path)
-    
+    # Pick a dataset
+    train_dataset = get_book_dataset(dataset_path, text_file_path)
+    # train_dataset = get_wiki_dataset()
+
     # Define the training arguments
     training_args = TrainingArguments(
         save_total_limit=1,  # Maximum number of checkpoints to keep
         output_dir=save_path,  # Output directory for model and checkpoints
         learning_rate=1e-5,  # Learning rate for training
-        num_train_epochs=10,  # Number of training epochs
+        num_train_epochs=1,  # Number of training epochs
         per_device_train_batch_size=1,  # Batch size per device
         warmup_steps=500,  # Number of warm-up steps
     )
