@@ -8,7 +8,7 @@ from transformers import DataCollatorForLanguageModeling  # Provides a function 
 from transformers import TrainingArguments, Trainer  # Provides training utility functions
 
 # Uncomment this next line to use LLama
-from llama_model import model, tokenizer
+# from llama_model import model, tokenizer
 
 
 # Function to tokenize dataset
@@ -50,8 +50,8 @@ def main(model, tokenizer):
     training_args = TrainingArguments(
         save_total_limit=1,  # Maximum number of checkpoints to keep
         output_dir=save_path,  # Output directory for model and checkpoints
-        learning_rate=2e-5,  # Learning rate for training
-        num_train_epochs=1,  # Number of training epochs
+        learning_rate=1e-5,  # Learning rate for training
+        num_train_epochs=10,  # Number of training epochs
         per_device_train_batch_size=1,  # Batch size per device
         warmup_steps=500,  # Number of warm-up steps
     )
@@ -86,13 +86,14 @@ if __name__ == '__main__':
     directory_name = "datasets"
     # Check if the datasets directory exists
     if not os.path.exists(directory_name):
-        print('Run "python setup.py" to download datasets and models from the login node. Then "sbatch job.sh".\n Look at readme.md for more setup info.')
+        print('Look at the readme.md for more setup info.')
     
+    # Keep this block of code uncommented for finetuning
     # Define the model and tokenizer
-    # model_name = 'gpt2'
-    # tokenizer = AutoTokenizer.from_pretrained(model_name)
-    # tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-    # model = AutoModelForCausalLM.from_pretrained(model_name)
+    model_name = 'meta-llama/Llama-2-7b-hf'
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+    model = AutoModelForCausalLM.from_pretrained(model_name)
     
     # Call the main function
     main(model, tokenizer)

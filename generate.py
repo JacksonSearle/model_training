@@ -11,6 +11,10 @@ model_name = "models/my_cool_model" # or "gpt2-medium" for example
 
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
+# Print model architecture and size in parameters
+print(f'\n\nModel Architecture: {model.config.architectures[0]}')
+print(f'Model Size (Parameters): {model.num_parameters()}\n')
+
 # Generate answers using the trained model
 input_prompt = "21 And it came to pass that the people of Nephi did"
 input_prompt_encoded = tokenizer.encode(input_prompt, return_tensors="pt")
