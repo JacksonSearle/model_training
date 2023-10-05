@@ -27,7 +27,7 @@ To begin, adhere to the following steps to ensure your environment is correctly 
    pip install -r requirements.txt
    ```
 5. **Configure Access Token**:
-   Follow the [token setup guide](https://huggingface.co/docs/hub/security-tokens) on Hugging Face. Then run ```huggingface-cli login``` in the command line to login to huggingface
+   Get a write access token from Hugging Face. Follow this [token setup guide](https://huggingface.co/docs/hub/security-tokens), then run ```huggingface-cli login``` in the command line to login to huggingface.
 6. **Run Setup and Submit Job**:
    ```
    python setup.py
