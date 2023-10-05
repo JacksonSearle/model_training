@@ -16,11 +16,9 @@ This project comprises several directories and files, each serving a specific pu
 To begin, adhere to the following steps to ensure your environment is correctly set up and ready for model training:
 
 1. **Create a Hugging Face Account**: Navigate to [Hugging Face](https://huggingface.co/login) and sign up if you haven’t already.
-2. **Configure Access Token**:
-   Follow the [token setup guide](https://huggingface.co/docs/hub/security-tokens) on Hugging Face and in the command line run ```export HF_TOKEN="YOUR_TOKEN_HERE"``` to add your HF token to your .bashrc
-3. **Request Llama 2 Access**: Apply for access at [Llama 2](https://ai.meta.com/llama/) using the same email you used for Hugging Face.
-4. **Obtain Access to the Llama-2-7b-hf Model**: Seek access to the [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) model through Hugging Face, access is usually granted within 0-2 days.
-5. **Clone the Repository and Set Up the Environment**:
+2. **Request Llama 2 Access**: Apply for access at [Llama 2](https://ai.meta.com/llama/) using the same email you used for Hugging Face.
+3. **Obtain Access to the Llama-2-7b-hf Model**: Seek access to the [Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) model through Hugging Face, access is usually granted within 0-2 days.
+4. **Clone the Repository and Set Up the Environment**:
    ```
    git clone https://github.com/JacksonSearle/model_training.git
    mamba create --name model_training
@@ -28,6 +26,8 @@ To begin, adhere to the following steps to ensure your environment is correctly 
    mamba install python
    pip install -r requirements.txt
    ```
+5. **Configure Access Token**:
+   Follow the [token setup guide](https://huggingface.co/docs/hub/security-tokens) on Hugging Face. Then run ```huggingface-cli login``` in the command line to login to huggingface
 6. **Run Setup and Submit Job**:
    ```
    python setup.py
@@ -44,14 +44,16 @@ To begin, adhere to the following steps to ensure your environment is correctly 
 ### Hyperparameter Adjustments
 - **num_train_epochs** (in train.py): Determines how many times the model will go through the entire dataset.
 - **model_name** (in train.py): Change this to any gpt2 model name you see in setup.py. Add any new models you want to setup.py and re-run setup.py in the login node to download the model for training.
-- **books** (in setup.py) and **book_name** (in train.py): In setup.py, include a book name and its URL from [Project Gutenberg](https://www.gutenberg.org/). Ensure the URL terminates with ".txt". Re-run setup.py in the login node to download the new dataset for training. Change **book_name** in train.py to select that new book.
-- **Wikipedia Dataset** (in train.py): This is a collection of Wikipedia articles. Uncomment the line in train.py to select it.
-- **max_new_tokens** (in generate.py and train.py): Change this to a larger value to generate more text from your model.
-- **Train From Scratch** (in train.py): Comment out the block of code that defines the model and tokenizer. Uncomment the line towards the top of the page where it imports llama_model. Change the fraction in llama_model.py to change the size of the model. You may want to choose the Wikipedia dataset in train.py to give your from-scratch model enough data to learn English.
+- **books** (in setup.py) and **book_name** (in train.py): In setup.py, include a book name and its URL from [Project Gutenberg](https://www.gutenberg.org/). Ensure the URL ends with ".txt". Re-run setup.py in the login node to download the new dataset for training. Change **book_name** in train.py to select that new book.
+- **Wikipedia Dataset** (in train.py): This is a collection of Wikipedia articles. Uncomment the line in train.py to select it. Comment out the line that loads a book as a dataset.
+- **max_new_tokens** (in generate.py and train.py): Change this to a larger value to generate more sample text from your model.
+- **Train From Scratch** (in train.py): Comment out the block of code that defines the model and tokenizer. Uncomment the line towards the top of the page where it imports llama_model. Change the fraction in llama_model.py to change the size of the model. If your model is too big for the gpu you will get some errors during training. You may want to choose the Wikipedia dataset in train.py to give your from-scratch model enough data to learn English.
 
 ## GPU Training Recommendations
-- For gpt2 training: `#SBATCH --gpus=1 -C kepler` with a batch size of 1.
-- For gpt-medium training: `#SBATCH --gpus=1 -C pascal` with a batch size of 1.
+- For gpt2 (24M parameters) training try `#SBATCH --gpus=1 -C kepler` with a batch size of 1
+- For gpt-medium (355M parameters) training try `#SBATCH --gpus=1 -C pascal` with a batch size of 1
+- For models that don't fit on pascal, as the TAs for how to access ampere gpus
+- If your job takes forever to run and you want to cancel it, type `scancel job_id` into the command line where the job_id is a large number corresponding to your job's id. Try `sbatch job.sh` again without the `-C gpu_name`. This will put your job on whatever GPU is available instead of selecting a specific one.
 
 ### Hardware and Resource Information
 For insights on available hardware resources, refer to [BYU Resources](https://rc.byu.edu/documentation/resources).
