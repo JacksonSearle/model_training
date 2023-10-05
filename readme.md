@@ -50,7 +50,7 @@ To begin, adhere to the following steps to ensure your environment is correctly 
 - **Train From Scratch** (in train.py): Comment out the block of code that defines the model and tokenizer. Uncomment the line towards the top of the page where it imports llama_model. Change the fraction in llama_model.py to change the size of the model. If your model is too big for the gpu you will get some errors during training. You may want to choose the Wikipedia dataset in train.py to give your from-scratch model enough data to learn English.
 
 ## GPU Training Recommendations
-- For gpt2 (24M parameters) training try `#SBATCH --gpus=1 -C kepler` with a batch size of 1
+- For gpt2 (124M parameters) training try `#SBATCH --gpus=1 -C kepler` with a batch size of 1
 - For gpt-medium (355M parameters) training try `#SBATCH --gpus=1 -C pascal` with a batch size of 1
 - For models that don't fit on pascal, as the TAs for how to access ampere gpus
 - If your job takes forever to run and you want to cancel it, type `scancel job_id` into the command line where the job_id is a large number corresponding to your job's id. Try `sbatch job.sh` again without the `-C gpu_name`. This will put your job on whatever GPU is available instead of selecting a specific one.
